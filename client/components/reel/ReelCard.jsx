@@ -1,24 +1,19 @@
 "use client"
 
-import {
-  Search,
-  Home,
-  Bookmark,
-  Grid2x2,
-  Clock3,
-  CirclePlus,
-  User,
-  X
-} from "lucide-react"
+import {Search, Home,Bookmark,Grid2x2,Clock3,CirclePlus,User,X} from "lucide-react"
 
 import { useEffect, useState } from "react"
 
 export default function ReelCard({ fact }) {
-  const [liked, setLiked] = useState(false)
+ 
   const [showAuth, setShowAuth] = useState(false)
+  const [isSignup, setIsSignup] = useState(false)
 const [user, setUser] = useState(null)
+ 
 
   const [saved, setSaved] = useState(false)
+  const [email, setEmail] = useState("")
+const [password, setPassword] = useState("")
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
@@ -159,6 +154,10 @@ overflow-hidden
           </div>
 
           <div className="flex gap-2">
+            <div  onClick={() => setShowAuth(true)}  className="  h-10 w-10 rounded-full  bg-white/20  flex items-center justify-center  cursor-pointer  active:scale-95  transition-all duration-300">
+               {user ? (<div className=" w-7 h-7 rounded-full      bg-white text-black      text-xs font-semibold      flex items-center justify-center    ">  
+                    {user.name?.[0]}  </div>  ) : (  <User size={18} /> )}
+                    </div>
 
             <div className="
             h-10 w-10 rounded-full
@@ -285,11 +284,7 @@ overflow-hidden
             </div>
 
             <div
-              onClick={() => {if (!user) { setShowAuth(true)
-                  return
-                  }
-                    toggleSave()
-                    }}
+              onClick={() =>  requireAuth(toggleSave)}
               className={`
               rounded-[32px]
               p-6
@@ -387,8 +382,7 @@ overflow-hidden
         </div>
 
       )}
-
-      {showAuth && (
+{showAuth && (
 
   <div className="
     fixed inset-0 z-50
@@ -416,78 +410,135 @@ overflow-hidden
           text-white/60
         "
       >
-        <X size={22}/>
+        <X size={22} />
       </button>
 
       <h2 className="text-3xl mb-2">
-        Welcome back
+
+        {isSignup
+          ? "Create account"
+          : "Welcome back"
+        }
+
       </h2>
 
       <p className="text-white/60 mb-8">
-        Login to save your tech facts
+
+        {isSignup
+          ? "Sign up to save your tech facts"
+          : "Login to continue"
+        }
+
       </p>
 
       <div className="space-y-4">
 
         <input
-          type="email"
-          placeholder="Email"
-          className="
-            w-full
-            bg-white/10
-            border border-white/10
-            rounded-2xl
-            px-4 py-4
-            outline-none
-          "
-        />
-
-        <input
-          type="password"
+            type="email"
+  placeholder="Email"
+  value={email}
+  onChange={(e) =>
+    setEmail(e.target.value)
+  }
+          className=" w-full bg-white/10  border border-white/10  rounded-2xl  px-4 py-4  outline-none "/>
+         <input  type="password"  value={password}  onChange={(e) =>
+             setPassword(e.target.value)
+  }
           placeholder="Password"
-          className="
-            w-full
-            bg-white/10
-            border border-white/10
-            rounded-2xl
-            px-4 py-4
-            outline-none
-          "
-        />
+          className=" w-fullbg-white/10 border border-white/10 rounded-2xl px-4 py-4 outline-none "/>
+           {isSignup && (
 
-        <button
-          onClick={() => {
+          <input type="password" placeholder="Confirm Password"
+            className=" w-full bg-white/10 border border-white/10 rounded-2xl px-4 py-4 outline-none"/>
+             )}
 
-            const fakeUser = {
-              name: "Tech User"
-            }
+           <button
+  onClick={async () => {
 
-            localStorage.setItem(
-              "user",
-              JSON.stringify(fakeUser)
-            )
+    try {
 
-            setUser(fakeUser)
+      const endpoint =
+        isSignup
+          ? "/signup"
+          : "/login"
 
-            setShowAuth(false)
+      const res = await fetch(
+        `http://localhost:5000/api/auth${endpoint}`,
+        {
 
-            toggleSave()
+          method: "POST",
 
-          }}
-          className="
-            w-full
-            rounded-2xl
-            py-4
-            bg-white
-            text-black
-            font-medium
-            mt-2
-            active:scale-[0.98]
-            transition-all
-          "
-        >
-          Continue
-        </button>
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            email,
+            password
+          })
+
+        }
+      )
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        alert(data.message)
+        return
+      }
+
+      localStorage.setItem(
+        "token",
+        data.token
+      )
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      )
+
+      setUser(data.user)
+
+      setShowAuth(false)
+
+      setEmail("")
+      setPassword("")
+
+    } catch (err) {
+
+      console.log(err)
+
+    }
+
+  }}
+
+  className="
+    w-full
+    rounded-2xl
+    py-4
+    bg-white
+    text-black
+    font-medium
+    mt-2
+    active:scale-[0.98]
+    transition-all duration-300
+  "
+>
+
+  {isSignup
+    ? "Create Account"
+    : "Continue"
+  }
+
+</button>
+                 <p onClick={() => setIsSignup(prev => !prev) }
+                 className="text-sm text-white/60 text-center mt-5 cursor-pointer" >
+                  {isSignup
+            ? "Already have an account? Login"
+            : "Don't have an account? Sign up"
+          }
+
+        </p>
 
       </div>
 
@@ -496,7 +547,10 @@ overflow-hidden
   </div>
 
 )}
+      
 
-    </div>
-  )
-}
+  </div>
+
+)}
+
+   

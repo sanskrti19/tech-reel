@@ -11,7 +11,17 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+
+  savedFacts: [
+    {
+      id: Number,
+      title: String,
+      description: String,
+      bg: String,
+      url: String
+    }
+  ]
 
 })
 
