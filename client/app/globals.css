@@ -46,3 +46,35 @@ display:none;
 .animate-slowZoom {
   animation: slowZoom 18s ease-in-out infinite alternate;
 }
+:root {
+  --font-heading: "HelveticaNowDisplay-Medium",
+    sans-serif;
+
+  --font-body:
+    "HelveticaNowDisplayW01-Rg",
+    sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.cursor-blink {
+  width: 2px;
+  height: 1.1em;
+  display: inline-block;
+  background: black;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
