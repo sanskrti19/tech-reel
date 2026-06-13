@@ -114,117 +114,101 @@ export default function HeroLanding() {
       <div className="fixed inset-0 bg-black/10 z-0" />
 
       {/* NAVBAR */}
+ {/* NAVBAR */}
+<header className="fixed inset-x-0 top-0 z-20 px-5 sm:px-8 py-5">
+  <div className="relative flex items-center justify-between">
 
-      <header className="fixed inset-x-0 top-0 z-10 px-5 sm:px-8 py-5">
-        <div className="flex items-center justify-between">
+    {/* Logo */}
+    <div className="flex items-center gap-3">
+      <span
+        className="text-[21px] sm:text-[26px] text-black tracking-tight"
+        style={{
+          fontFamily: "var(--font-heading)",
+        }}
+      >
+        Mainframe®
+      </span>
 
-          <div className="flex items-center gap-3">
-            <span
-              className="text-[21px] sm:text-[26px] text-black tracking-tight"
-              style={{
-                fontFamily: "var(--font-heading)",
-              }}
-            >
-              Mainframe®
-            </span>
+      <span className="text-[25px] sm:text-[30px] text-black">
+        ✳︎
+      </span>
+    </div>
 
-            <span className="text-[25px] sm:text-[30px] text-black">
-              ✳︎
-            </span>
-          </div>
+    {/* Desktop nav */}
+    <div className="hidden md:flex items-center text-[23px] text-black">
+      <a href="#" className="hover:opacity-60">
+        Labs
+      </a>
+      <span>,&nbsp;</span>
 
-          <div className="hidden md:flex items-center text-[23px] text-black">
-            <a href="#" className="hover:opacity-60">
-              Labs
-            </a>
-            <span>,&nbsp;</span>
+      <a href="#" className="hover:opacity-60">
+        Studio
+      </a>
+      <span>,&nbsp;</span>
 
-            <a href="#" className="hover:opacity-60">
-              Studio
-            </a>
-            <span>,&nbsp;</span>
+      <a href="#" className="hover:opacity-60">
+        Openings
+      </a>
+      <span>,&nbsp;</span>
 
-            <a href="#" className="hover:opacity-60">
-              Openings
-            </a>
-            <span>,&nbsp;</span>
+      <a href="#" className="hover:opacity-60">
+        Shop
+      </a>
+    </div>
 
-            <a href="#" className="hover:opacity-60">
-              Shop
-            </a>
-          </div>
-
-          <a
-            href="#"
-            className="hidden md:block text-[23px] underline"
-          >
-            Get in touch
-          </a>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-[5px]"
-          >
-            <div
-  className={`flex flex-wrap transition-all duration-500 ${
-    showActions
-      ? "opacity-100 translate-y-0"
-      : "opacity-0 translate-y-2"
-  }`}
->
-
-  <Link
-    href="/"
-    className="
-      mx-[0.2em]
-      mb-[0.4em]
-      rounded-full
-      bg-black
-      text-white
-      px-5
-      py-2
-      text-sm
-      hover:bg-white
-      hover:text-black
-      transition
-    "
-  >
-    Explore →
-  </Link>
-
-  {[
-    "Pitch us an idea",
-    "Come work here",
-    "Send a brief hello",
-    "See how we operate",
-  ].map((item) => (
-    <button
-      key={item}
-      className="
-        mx-[0.2em]
-        mb-[0.4em]
-        rounded-full
-        bg-white
-        border
-        border-black/10
-        px-5
-        py-2
-        text-black
-        text-sm
-        hover:bg-black
-        hover:text-white
-        transition
-      "
+    {/* Desktop CTA */}
+    <a
+      href="#"
+      className="hidden md:block text-[23px] underline"
     >
-      {item}
+      Get in touch
+    </a>
+
+    {/* Mobile Hamburger */}
+    <button
+      onClick={() => setMenuOpen(!menuOpen)}
+      className="md:hidden flex flex-col gap-[5px]"
+    >
+      <span className="w-6 h-[2px] bg-black" />
+      <span className="w-6 h-[2px] bg-black" />
+      <span className="w-6 h-[2px] bg-black" />
     </button>
-  ))}
-            <span className="w-6 h-[2px] bg-black" />
-            <span className="w-6 h-[2px] bg-black" />
-            <span className="w-6 h-[2px] bg-black" />
+
+    {/* Mobile Menu */}
+    {menuOpen && (
+      <div className="absolute top-14 right-0 w-72 rounded-3xl bg-white/90 backdrop-blur-md p-4 shadow-xl flex flex-col gap-3 md:hidden">
+
+        <Link
+          href="/explore"
+          className="rounded-full bg-black text-white px-5 py-3 text-center hover:bg-white hover:text-black border border-black transition"
+        >
+          Explore →
+        </Link>
+
+        {[
+          "Pitch us an idea",
+          "Come work here",
+          "Send a brief hello",
+          "See how we operate",
+        ].map((item) => (
+          <button
+            key={item}
+            className="rounded-full bg-white border border-black/10 px-5 py-3 text-black text-sm hover:bg-black hover:text-white transition"
+          >
+            {item}
           </button>
-        </div>
-      </header>
+        ))}
+
+        <button
+          onClick={copyEmail}
+          className="rounded-full border border-black px-5 py-3 text-black hover:bg-black hover:text-white transition"
+        >
+          hello@mainframe.co
+        </button>
+      </div>
+    )}
+  </div>
+</header>
 
       {/* HERO */}
 
@@ -299,4 +283,3 @@ export default function HeroLanding() {
     </main>
   );
 }
-
