@@ -17,7 +17,7 @@ export default function HeroLanding() {
   const [showActions, setShowActions] = useState(false);
 
   const { displayed, done } = useTypewriter(
-    "Glad you stopped in. Good taste tends to find us. Now, what are we building?"
+    "Your next coding breakthrough might be one reel away."
   );
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function HeroLanding() {
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(
-        "hello@mainframe.co"
+        "hello@TechReel.co"
       );
     } catch (err) {
       console.log(err);
@@ -111,60 +111,38 @@ export default function HeroLanding() {
         <source src={VIDEO_URL} type="video/mp4" />
       </video>
 
-      <div className="fixed inset-0 bg-black/10 z-0" />
-
-      {/* NAVBAR */}
+       <div className="fixed inset-0 bg-black/30 backdrop-blur-[1px] z-0" />
+ 
  {/* NAVBAR */}
 <header className="fixed inset-x-0 top-0 z-20 px-5 sm:px-8 py-5">
   <div className="relative flex items-center justify-between">
 
-    {/* Logo */}
-    <div className="flex items-center gap-3">
-      <span
-        className="text-[21px] sm:text-[26px] text-black tracking-tight"
-        style={{
-          fontFamily: "var(--font-heading)",
-        }}
-      >
-        Mainframe®
-      </span>
+    
+     
 
-      <span className="text-[25px] sm:text-[30px] text-black">
-        ✳︎
-      </span>
-    </div>
-
-    {/* Desktop nav */}
+   
     <div className="hidden md:flex items-center text-[23px] text-black">
       <a href="#" className="hover:opacity-60">
-        Labs
+        Explore
+
+      </a>
+      <span>,&nbsp;</span>
+
+     
+
+      <a href="#" className="hover:opacity-60">
+    
+      Trending
+
       </a>
       <span>,&nbsp;</span>
 
       <a href="#" className="hover:opacity-60">
-        Studio
-      </a>
-      <span>,&nbsp;</span>
 
-      <a href="#" className="hover:opacity-60">
-        Openings
-      </a>
-      <span>,&nbsp;</span>
-
-      <a href="#" className="hover:opacity-60">
-        Shop
+        Creators
       </a>
     </div>
-
-    {/* Desktop CTA */}
-    <a
-      href="#"
-      className="hidden md:block text-[23px] underline"
-    >
-      Get in touch
-    </a>
-
-    {/* Mobile Hamburger */}
+ 
     <button
       onClick={() => setMenuOpen(!menuOpen)}
       className="md:hidden flex flex-col gap-[5px]"
@@ -174,22 +152,19 @@ export default function HeroLanding() {
       <span className="w-6 h-[2px] bg-black" />
     </button>
 
-    {/* Mobile Menu */}
+     
     {menuOpen && (
       <div className="absolute top-14 right-0 w-72 rounded-3xl bg-white/90 backdrop-blur-md p-4 shadow-xl flex flex-col gap-3 md:hidden">
-
-        <Link
-          href="/explore"
-          className="rounded-full bg-black text-white px-5 py-3 text-center hover:bg-white hover:text-black border border-black transition"
-        >
-          Explore →
-        </Link>
+  
+   
 
         {[
-          "Pitch us an idea",
-          "Come work here",
-          "Send a brief hello",
-          "See how we operate",
+           [
+            "Start Learning",
+            "Explore Reels",
+            "Browse Topics",
+            "Join Community",
+            ]
         ].map((item) => (
           <button
             key={item}
@@ -199,12 +174,7 @@ export default function HeroLanding() {
           </button>
         ))}
 
-        <button
-          onClick={copyEmail}
-          className="rounded-full border border-black px-5 py-3 text-black hover:bg-black hover:text-white transition"
-        >
-          hello@mainframe.co
-        </button>
+       
       </div>
     )}
   </div>
@@ -216,21 +186,7 @@ export default function HeroLanding() {
 
         <div className="max-w-xl">
 
-          <div
-            className="mb-6 select-none text-black"
-            style={{
-              filter: "blur(4px)",
-              fontSize: "clamp(18px,4vw,26px)",
-              lineHeight: "1.3",
-            }}
-          >
-            <div>Hey there, meet A.R.I.A,</div>
-
-            <div>
-              Mainframe's Adaptive Response
-              Interface Agent
-            </div>
-          </div>
+           
 
           <p
             className="mb-6 text-black"
@@ -247,37 +203,7 @@ export default function HeroLanding() {
             )}
           </p>
 
-          <div
-            className={`flex flex-wrap transition-all duration-500 ${
-              showActions
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-2"
-            }`}
-          >
-            {[
-              "Pitch us an idea",
-              "Come work here",
-              "Send a brief hello",
-              "See how we operate",
-            ].map((item) => (
-              <button
-                key={item}
-                className="mx-[0.2em] mb-[0.4em] rounded-full bg-white border border-black/10 px-5 py-2 text-black text-sm hover:bg-black hover:text-white transition"
-              >
-                {item}
-              </button>
-            ))}
-
-            <button
-              onClick={copyEmail}
-              className="mx-[0.2em] mb-[0.4em] rounded-full border border-white px-5 py-2 text-white hover:bg-white hover:text-black transition"
-            >
-              Reach us:
-              <span className="underline ml-1">
-                hello@mainframe.co
-              </span>
-            </button>
-          </div>
+           
         </div>
       </section>
     </main>
