@@ -128,12 +128,14 @@ export default function HeroLanding() {
 
         {menuOpen && (
           <div className="absolute top-14 right-0 w-72 rounded-3xl bg-white/90 backdrop-blur-md p-4 shadow-xl flex flex-col gap-3 md:hidden">
-            {[
-              "Start Learning",
-              "Explore Reels",
-              "Browse Topics",
-              "Join Community",
-            ].map((item) => (
+            {
+            [
+            "Start Learning",  
+            "Explore Reels",
+            "Browse Topics",
+            "Join Community",
+               
+              ] .map((item) => (
               <button
                 key={item}
                 className="rounded-full bg-white border border-black/10 px-5 py-3 text-black text-sm hover:bg-black hover:text-white transition"

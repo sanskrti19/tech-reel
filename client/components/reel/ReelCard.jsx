@@ -11,10 +11,13 @@ export default function ReelCard({ fact }) {
 const [user, setUser] = useState(null)
  
 
-  const [saved, setSaved] = useState(false)
-  const [email, setEmail] = useState("")
-const [password, setPassword] = useState("")
-  const [showModal, setShowModal] = useState(false)
+   const [saved, setSaved] = useState(false)
+   const [email, setEmail] = useState("")
+   const [password, setPassword] = useState("")
+   const [showModal, setShowModal] = useState(false)
+ 
+
+ 
 
   useEffect(() => {
 
@@ -57,35 +60,46 @@ const [password, setPassword] = useState("")
   }, [fact.title])
 
   const toggleSave = () => {
+  const token = localStorage.getItem("token");
+
+   if (!token) {
+  setShowAuth(true);
+  return;
+  }
+  const savedFacts =
+    JSON.parse(localStorage.getItem("savedFacts")) || [];
+
+  const exists = savedFacts.some(
+    item => item.title === fact.title
+  );
+
+  let updated;
+
+  if (exists) {
+    updated = savedFacts.filter(
+      item => item.title !== fact.title
+    );
+
+    setSaved(false);
+  } else {
+    updated = [...savedFacts, fact];
+
+    setSaved(true);
+  }
+
+  localStorage.setItem(
+    "savedFacts",
+    JSON.stringify(updated)
+  );
+};
+
+ 
     const savedFacts =
       JSON.parse(localStorage.getItem("savedFacts")) || []
 
-    const exists = savedFacts.some(
-      item => item.title === fact.title
-    )
-
-    let updated
-
-    if (exists) {
-      updated = savedFacts.filter(
-        item => item.title !== fact.title
-      )
-
-      setSaved(false)
-
-    } else {
-
-      updated = [...savedFacts, fact]
-
-      setSaved(true)
-    }
-
-    localStorage.setItem(
-      "savedFacts",
-      JSON.stringify(updated)
-    )
-  }
-
+  
+ 
+  
   const requireAuth = (callback) => {
 
   if (!user) {
@@ -306,11 +320,13 @@ overflow-hidden
               </p>
 
               <div className="self-end">
-
                 <Bookmark
-                  size={38}
-                  fill={saved ? "white" : "transparent"}
-                />
+                   size={38}
+                      onClick={toggleSave}
+                     fill={saved ? "white" : "none"}
+                    className="cursor-pointer"
+                  />
+ 
 
               </div>
 
