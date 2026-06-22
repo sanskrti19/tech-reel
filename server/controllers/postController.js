@@ -26,6 +26,29 @@ const getPosts = async (req, res) => {
   }
 };
 
+const incrementViews = async (req, res) => {
+  try {
+
+    await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $inc: { views: 1 }
+      }
+    );
+
+    res.json({
+      success: true
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};
+
 module.exports = {
-  getPosts,
+  getPosts, incrementViews,
 };

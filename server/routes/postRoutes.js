@@ -1,9 +1,16 @@
 const router = require("express").Router();
 
-const { getPosts } = require("../controllers/postController");
+const {  getPosts,  incrementViews} = require("../controllers/postController");
 const { syncContent } = require("../services/contentSync");
 
 router.get("/", getPosts);
+router.post("/:id/view", incrementViews);
+router.get("/:id/view", (req, res) => {
+  res.json({
+    routeWorks: true,
+    id: req.params.id
+  });
+});
 
 router.get("/sync", async (req, res) => {
   try {

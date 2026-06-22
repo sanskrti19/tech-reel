@@ -4,7 +4,10 @@ import {Search, Home,Bookmark,Grid2x2,Clock3,CirclePlus,User,X} from "lucide-rea
 
 import { useEffect, useState } from "react"
 
-export default function ReelCard({ fact }) {
+ export default function ReelCard({
+  fact,
+  markViewed
+}) {
  
   const [showAuth, setShowAuth] = useState(false)
   const [isSignup, setIsSignup] = useState(false)
@@ -17,7 +20,19 @@ const [user, setUser] = useState(null)
    const [showModal, setShowModal] = useState(false)
  
 
- 
+ useEffect(() => {
+
+  if (!fact?._id || !markViewed)
+    return;
+
+  const timer = setTimeout(() => {
+    markViewed(fact._id);
+  }, 2000);
+
+  return () => clearTimeout(timer);
+
+}, [fact?._id, markViewed]);
+   
 
   useEffect(() => {
 
@@ -216,8 +231,7 @@ overflow-hidden
           </h1>
 
         </div>
-
-        {/* cards */}
+ 
         <div className="
         absolute
         bottom-28
@@ -226,8 +240,7 @@ overflow-hidden
         w-[370px]
         space-y-4
       ">
-
-          {/* top cards */}
+ 
           <div className="grid grid-cols-2 gap-4">
 
             <div className={`
@@ -240,10 +253,9 @@ overflow-hidden
             ${theme.glow}
           `}>
 
-              <p className="text-6xl font-bold">
-                12
-              </p>
-
+               <p className="text-6xl font-bold">
+                 {fact.views || 0}
+               </p>
               <p className="mt-4 text-white/70">
                 Reads
               </p>
@@ -268,8 +280,7 @@ overflow-hidden
             </div>
 
           </div>
-
-          {/* bottom cards */}
+ 
           <div className="grid grid-cols-2 gap-4">
 
             <div className={`
@@ -340,8 +351,7 @@ overflow-hidden
           </div>
 
         </div>
-
-        {/* bottom navbar */}
+ 
         <div className="
         absolute
         bottom-8
@@ -360,8 +370,7 @@ overflow-hidden
         </div>
 
       </div>
-
-      {/* modal */}
+ 
       {showModal && (
 
         <div className="

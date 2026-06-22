@@ -7,6 +7,11 @@ const postSchema = new mongoose.Schema({
   url: String,
   image: String,
 
+  views: {
+  type: Number,
+  default: 0,
+},
+
   tags: [String],
 
   content: String,

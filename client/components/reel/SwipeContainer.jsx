@@ -1,68 +1,78 @@
-"use client"
+"use client";
 
-import {useEffect,useState} from "react"
-import ReelCard from "./ReelCard"
-import SkeletonReel from "../SkeletonReel"
+import { useEffect, useRef, useState } from "react";
+import ReelCard from "./ReelCard";
+import SkeletonReel from "../SkeletonReel";
 
-export default function SwipeContainer(){
+export default function SwipeContainer() {
+  const viewedPosts = useRef(new Set());
 
-const [facts,setFacts]=useState([])
-const [loading,setLoading]=useState(true)
-setLoading(false)
-useEffect(()=>{
+  const [facts, setFacts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const getFacts=async()=>{
+  const markViewed = async (postId) => {
+    if (!postId) return;
 
-try{
+    console.log("VIEW:", postId);
 
-const response=await fetch(
-"http://localhost:5000/api/facts"
-)
+    if (viewedPosts.current.has(postId)) {
+      return;
+    }
 
-const data=await response.json()
+    viewedPosts.current.add(postId);
 
-setFacts(data.posts)
+    try {
+      await fetch(
+        `http://localhost:5000/api/posts/${postId}/view`,
+        {
+          method: "POST",
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-}catch(error){
+  useEffect(() => {
+    const getFacts = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/posts?page=1&limit=10"
+        );
 
-console.log(error)
+        const data = await response.json();
 
-}
+        setFacts(data.posts || []);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-setLoading(false)
+    getFacts();
+  }, []);
 
-}
+  if (loading) {
+    return <SkeletonReel />;
+  }
 
-getFacts()
-
-},[])
- 
-if (loading) {
-  return <SkeletonReel />
-}
- 
-return(
-
-<div
-className="
-h-screen
-overflow-y-scroll
-snap-y
-snap-mandatory
-"
->
-
-{facts.map((fact)=>(
-
-<ReelCard
-key={fact.id}
-fact={fact}
-/>
-
-))}
-
-</div>
-
-)
-
+  return (
+    <div
+      className="
+        h-screen
+        overflow-y-scroll
+        snap-y
+        snap-mandatory
+      "
+    >
+      {facts.map((fact) => (
+        <ReelCard
+          key={fact._id}
+          fact={fact}
+          markViewed={markViewed}
+        />
+      ))}
+    </div>
+  );
 }
