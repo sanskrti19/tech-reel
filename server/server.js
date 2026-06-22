@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
+const postRoutes = require("./routes/postRoutes");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/facts", require("./routes/factRoutes"));
+app.use("/api/posts", postRoutes);
 
 const PORT = process.env.PORT || 5000;
 
