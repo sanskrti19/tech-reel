@@ -116,29 +116,30 @@ h-screen
 snap-start
 relative
 overflow-hidden
-"> 
-      {/* Background image */}
+">  
       <div className="absolute inset-0 overflow-hidden">
 
         <img
-          src={fact.bg}
+
+        src={
+  fact.image ||
+  "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+}
+       
           alt={fact.title}
           className="absolute inset-0 w-full h-full object-cover scale-100 opacity-55 blur-[2px] brightness-[0.55]
         "
         />
-
-        {/* subtle dark overlay */}
+ 
         <div className="absolute inset-0 bg-black/35" />
-
-        {/* center readability mask */}
+ 
         <div
           className="
           absolute inset-0
           bg-[radial-gradient(circle_at_50%_38%,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.45)_35%,transparent_75%)]
         "
         />
-
-        {/* themed overlay */}
+ 
         <div
           className={`
           absolute inset-0
@@ -150,20 +151,18 @@ overflow-hidden
         />
 
       </div>
-
-      {/* Main content */}
+ 
       <div className="relative z-10 w-full max-w-[420px] mx-auto h-full px-4 py-5 flex flex-col text-white">
-
-        {/* top nav */}
+ 
         <div className="flex justify-between items-center">
 
           <div className="bg-white/12 backdrop-blur-md border border-white/20 shadow-xl rounded-full px-3 py-2 flex items-center gap-2">
 
             <div className="w-8 h-8 rounded-full bg-zinc-500" />
 
-            <p className="text-sm">
-              Daily Tech
-            </p>
+             <p className="text-sm">
+  {fact.source}
+</p>
 
           </div>
 
@@ -192,8 +191,7 @@ overflow-hidden
           </div>
 
         </div>
-
-        {/* hero */}
+ 
         <div className="mt-12">
 
           <p className="text-white/70 mb-2">
@@ -289,7 +287,14 @@ overflow-hidden
              transition-all duration-300
           `}>
 
-              <p>Read Docs</p>
+              <div
+  onClick={() =>
+    window.open(fact.url, "_blank")
+  }
+  className="..."
+>
+  <p>Read Docs</p>
+</div>
 
               <div className="self-end">
                 <CirclePlus size={38} />

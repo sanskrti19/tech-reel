@@ -21,7 +21,7 @@ const response=await fetch(
 
 const data=await response.json()
 
-setFacts(data)
+setFacts(data.posts)
 
 }catch(error){
 

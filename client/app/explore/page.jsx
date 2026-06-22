@@ -6,25 +6,38 @@ import ReelCard from "@/components/reel/ReelCard"
 import SkeletonReel from "@/components/SkeletonReel"
 
 export default function ExplorePage() {
-  const [facts, setFacts] = useState([])
-  const [loading, setLoading] = useState(true)
+   const [facts, setFacts] = useState([])
+const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchFacts = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/api/facts")
-        const data = await res.json()
+const [page, setPage] = useState(1)
+const [hasMore, setHasMore] = useState(true)
 
-        setFacts(data)
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setLoading(false)
-      }
-    }
 
-    fetchFacts()
-  }, [])
+const fetchPosts = async (pageNum) => {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/posts?page=${pageNum}&limit=10`
+    )
+
+    const data = await res.json()
+
+    setFacts(prev => [
+      ...prev,
+      ...data.posts
+    ])
+
+    setHasMore(data.hasMore)
+
+  } catch (err) {
+    console.log(err)
+  } finally {
+    setLoading(false)
+  }
+}
+
+    useEffect(() => {
+  fetchPosts(1)
+}, [])
 
   if (loading) {
     return <SkeletonReel />
