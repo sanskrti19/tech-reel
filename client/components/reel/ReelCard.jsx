@@ -1,13 +1,56 @@
 "use client"
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import {Search, Home,Bookmark,Grid2x2,Clock3,CirclePlus,User,X} from "lucide-react"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
  export default function ReelCard({
   fact,
   markViewed
 }) {
+  const cardRef = useRef(null)
+
+  useEffect(() => {
+    const element = cardRef.current
+    if (!element) return
+
+    let timerId = null
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+          if (!timerId) {
+            timerId = setTimeout(() => {
+              if (markViewed) {
+                markViewed(fact._id)
+              }
+            }, 2000)
+          }
+        } else {
+          if (timerId) {
+            clearTimeout(timerId)
+            timerId = null
+          }
+        }
+      },
+      {
+        threshold: 0.8,
+      }
+    )
+
+    observer.observe(element)
+
+    return () => {
+      if (element) {
+        observer.unobserve(element)
+      }
+      if (timerId) {
+        clearTimeout(timerId)
+      }
+    }
+  }, [fact._id, markViewed])
  
   const [showAuth, setShowAuth] = useState(false)
   const [isSignup, setIsSignup] = useState(false)
@@ -20,19 +63,7 @@ const [user, setUser] = useState(null)
    const [showModal, setShowModal] = useState(false)
  
 
- useEffect(() => {
-
-  if (!fact?._id || !markViewed)
-    return;
-
-  const timer = setTimeout(() => {
-    markViewed(fact._id);
-  }, 2000);
-
-  return () => clearTimeout(timer);
-
-}, [fact?._id, markViewed]);
-   
+ 
 
   useEffect(() => {
 
@@ -126,12 +157,15 @@ const [user, setUser] = useState(null)
 }
 
   return (
-     <div className="
-h-screen
-snap-start
-relative
-overflow-hidden
-">  
+     <div
+       ref={cardRef}
+       className="
+         h-screen
+         snap-start
+         relative
+         overflow-hidden
+       "
+     >  
       <div className="absolute inset-0 overflow-hidden">
 
         <img

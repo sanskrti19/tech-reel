@@ -147,22 +147,14 @@ export default function HeroLanding() {
         )}
       </header>
 
-      <section className="relative z-[1] h-screen flex flex-col justify-end md:justify-center px-5 sm:px-8 md:px-10 pb-12 md:pb-0">
-        <div className="max-w-xl">
-          <p
-            className="mb-6 text-white"
-            style={{
-              fontSize: "clamp(18px,4vw,26px)",
-              lineHeight: "1.35",
-              minHeight: "54px",
-            }}
-          >
-            {displayed}
-            {!done && <span className="cursor-blink ml-[2px]" />}
-          </p>
+      <section className="relative z-[1] h-screen flex flex-col justify-end md:justify-center px-5 sm:px-8 md:px-10 pb-12 md:pb-0 ">
+        <div className="max-w-4xl  space-y-6">
+         
+             <p className="text-6xl">Your next coding breakthrough might be <span className="text-black font-semibold">one reel</span> away.</p>
+          
 
           {showActions && (
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center mt-6">
               <Link
                 href="/explore"
                 className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-base font-medium text-black hover:bg-black hover:text-white transition"
