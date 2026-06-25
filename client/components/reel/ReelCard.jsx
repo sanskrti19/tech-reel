@@ -90,7 +90,8 @@ const [user, setUser] = useState(null)
       glow: "shadow-emerald-500/20"
     }
   ]
- 
+  const preview =
+  fact.description?.slice(0, 250);
   const theme =
     themes[fact.title?.length % themes.length]
 
@@ -307,9 +308,23 @@ const [user, setUser] = useState(null)
                 About
               </h3>
 
-              <p className="text-sm mt-4 leading-6 text-white/70 line-clamp-4">
+              <p className="text-zinc-300 leading-3">
+  {preview}
+  {fact.description?.length > 250 && "..."}
+</p>
+<div className="mt-3 flex gap-3">
+  <button>
+    Read More
+  </button>
+
+  <button>
+    ✨ Summarize
+  </button>
+</div>
+
+              {/* <p className="text-sm mt-4 leading-6 text-white/70 line-clamp-4">
                 {fact.description}
-              </p>
+              </p> */}
 
             </div>
 
@@ -437,9 +452,17 @@ const [user, setUser] = useState(null)
               About
             </h2>
 
+            <p className="text-zinc-300 leading-7">
+  {preview}
+  {fact.description?.length > 250 && "..."}
+</p>
+
+
+ 
+{/* 
             <p className="leading-7 text-white/80">
               {fact.description}
-            </p>
+            </p> */}
 
           </div>
 

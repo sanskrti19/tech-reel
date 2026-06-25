@@ -1,7 +1,8 @@
 const router = require("express").Router();
 
-const {  getPosts,  incrementViews} = require("../controllers/postController");
+const {  getPosts,  incrementViews, searchPosts} = require("../controllers/postController");
 const { syncContent } = require("../services/contentSync");
+router.get("/search", searchPosts);
 
 router.get("/", getPosts);
 router.post("/:id/view", incrementViews);

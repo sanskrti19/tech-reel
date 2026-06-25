@@ -4,8 +4,14 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import ReelCard from "./ReelCard";
 import SkeletonReel from "../SkeletonReel";
+import SearchBar from "./SearchBar";
 
 export default function SwipeContainer() {
+  const [searchTerm, setSearchTerm] =
+  useState("");
+
+const [searchLoading, setSearchLoading] =
+  useState(false);
   const viewedPosts = useRef(new Set());
   const initialExcludeIds = useRef([]);
   const containerRef = useRef(null);
@@ -18,7 +24,7 @@ export default function SwipeContainer() {
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  // Fetch facts function
+  
   const fetchFacts = async (pageNum, isInitial = false) => {
     if (isInitial) {
       setLoading(true);
@@ -45,8 +51,7 @@ export default function SwipeContainer() {
       }
     }
   };
-
-  // Initial load on mount
+ 
   useEffect(() => {
     let stored = [];
     try {
@@ -57,8 +62,7 @@ export default function SwipeContainer() {
     }
     fetchFacts(1, true);
   }, []);
-
-  // Handle scroll events to detect near bottom
+ 
   const handleScroll = (e) => {
     if (loading || loadingMore || !hasMore) return;
 
@@ -128,6 +132,7 @@ export default function SwipeContainer() {
           markViewed={markViewed}
         />
       ))}
+      <SearchBar  searchTerm={searchTerm}  setSearchTerm={setSearchTerm}/>
       {loadingMore && <SkeletonReel />}
     </div>
   );

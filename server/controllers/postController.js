@@ -11,7 +11,13 @@ const getPosts = async (req, res) => {
     if (exclude) {
       const excludeIds = exclude.split(",").filter(id => id.trim() !== "");
       if (excludeIds.length > 0) {
-        filter._id = { $nin: excludeIds };
+         const mongoose = require("mongoose");
+
+      filter._id = {
+     $nin: excludeIds.map(
+       id => new mongoose.Types.ObjectId(id)
+       )
+    };
       }
     }
 
@@ -35,11 +41,23 @@ const getPosts = async (req, res) => {
   }
 };
 
-// New searchPosts controller – case‑insensitive regex across title, description, category, source
-const searchPosts = async (req, res) => {
+ const searchPosts = async (req, res) => {
   try {
+
     const q = req.query.q || "";
-    const regex = { $regex: q, $options: "i" };
+
+    if (!q.trim()) {
+      return res.json({
+        posts: [],
+        hasMore: false
+      });
+    }
+
+    const regex = {
+      $regex: q,
+      $options: "i"
+    };
+
     const filter = {
       $or: [
         { title: regex },
@@ -48,10 +66,22 @@ const searchPosts = async (req, res) => {
         { source: regex },
       ],
     };
-    const posts = await Post.find(filter).sort({ publishedAt: -1 }).exec();
-    res.json({ posts, hasMore: false });
+
+    const posts = await Post.find(filter)
+      .sort({ publishedAt: -1 })
+      .exec();
+
+    res.json({
+      posts,
+      hasMore: false
+    });
+
   } catch (err) {
-    res.status(500).json({ message: err.message });
+
+    res.status(500).json({
+      message: err.message
+    });
+
   }
 };
 
