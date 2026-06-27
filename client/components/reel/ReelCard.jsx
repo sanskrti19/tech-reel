@@ -209,8 +209,17 @@ const [user, setUser] = useState(null)
             Daily report
           </p>
 
+          
           <h1
-           className="text-5xl sm:text-6xl font-extralight leading-none line-clamp-4 max-w-[320px]"
+  className="
+    text-4xl
+    sm:text-5xl
+    font-extralight
+    leading-[0.9]
+    line-clamp-4
+    max-w-[280px]
+  "
+
             style={{
               textShadow: "0 4px 30px rgba(0,0,0,0.7)"
             }}
@@ -220,96 +229,68 @@ const [user, setUser] = useState(null)
 
         </div>
  
-        <div className=" absolute bottom-28 left-1/2 -translate-x-1/2  w-[370px] space-y-4 ">
+        <div className=" absolute bottom-28 left-1/2 -translate-x-1/2  w-[320px] space-y-4 ">
  
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
 
-            <div className={`
-            rounded-[32px]
-            p-6
-            bg-white/10
-            backdrop-blur-xl
-            border border-white/10
-            shadow-2xl
-            ${theme.glow}
-          `}>
-
-               <p className="text-6xl font-bold">
-                 {fact.views || 0}
-               </p>
-              <p className="mt-4 text-white/70">
-                Reads
-              </p>
-
-            </div>
-
-            <div
-              onClick={() => setShowModal(true)}
-              className={`rounded-[32px] p-6 bg-white/10 backdrop-blur-xl border border-white/10 shadow-2xl ${theme.glow} cursor-pointer active:scale-[0.98]
-               transition-all duration-300
-            `}
-            >
-
-              <h3 className="text-xl">
-                About
-              </h3>
-
-              <p className="text-zinc-300 leading-3">  {preview}
-                  {fact.description?.length > 250 && "..."}
-                  </p>
-
-                  <div className="mt-5 flex gap-2 flex-wrap">
-
-  <span className="
-    px-4 py-2 rounded-full
-    bg-white/10 text-xs
+   <div
+  className={`
+    h-[130px]
+    rounded-[28px]
+    p-4
+    bg-white/10
+    backdrop-blur-xl
     border border-white/10
-  ">
-    Read More
-  </span>
+    shadow-2xl
+    ${theme.glow}
+  `}
+>
+  <p className="text-4xl font-bold">
+    {fact.views || 0}
+  </p>
 
-  <span className="
-    px-4 py-2 rounded-full
-    bg-cyan-500/20 text-xs
-    border border-cyan-500/20
-  ">
-    Summarize
-  </span>
-
+  <p className="mt-2 text-xs text-white/70">
+    Reads
+  </p>
 </div>
- 
 
- 
+<div
+  onClick={() => setShowModal(true)}
+  className={`
+    h-[110px]
+    rounded-[28px]
+    p-4
+    bg-white/10
+    backdrop-blur-xl
+    border border-white/10
+    shadow-2xl
+    ${theme.glow}
+    cursor-pointer
+    active:scale-[0.98]
+    transition-all duration-300
+    overflow-hidden
+  `}
+>
+  <h3 className="text-lg font-medium mb-1">
+    About
+  </h3>
 
-            </div>
-
+  <p className="text-zinc-300 text-xs leading-3 line-clamp-5">
+    {preview}
+    {fact.description?.length > 250 && "..."}
+  </p>
+</div>          
           </div>
  
           <div className="grid grid-cols-2 gap-4">
 
-            <div className={`
-            rounded-[32px]
-            p-6
-            h-36
-            bg-white/10
-            backdrop-blur-xl
-            border border-white/10
-            shadow-2xl
-            ${theme.glow}
-            flex flex-col justify-between
-            cursor-pointer
-            active:scale-[0.98]
-             transition-all duration-300
-          `}>
+            <div className={` rounded-[32px]  p-6 h-36 bg-white/10 backdrop-blur-xl border border-white/10
+            shadow-2xl ${theme.glow} flex flex-col justify-between cursor-pointer active:scale-[0.98] transition-all duration-300`}>
 
-              <div
-  onClick={() =>
-    window.open(fact.url, "_blank")
-  }
-  className="..."
->
-  <p>Read Docs</p>
-</div>
+
+              <div onClick={() => window.open(fact.url, "_blank") } className="...">
+                      <p>Read Docs</p>
+              </div>
 
               <div className="self-end">
                 <CirclePlus size={38} />
@@ -319,20 +300,9 @@ const [user, setUser] = useState(null)
 
             <div
               onClick={() =>  requireAuth(toggleSave)}
-              className={`
-              rounded-[32px]
-              p-6
-              h-36
-              bg-white/10
-              backdrop-blur-xl
-              border border-white/10
-              shadow-2xl
-              ${theme.glow}
-              flex flex-col justify-between
-              cursor-pointer
-              active:scale-95
-              transition-all duration-300
-            `}
+              className={`rounded-[32px] p-6  h-36 bg-white/10 backdrop-blur-xl border border-white/10
+              shadow-2xl ${theme.glow}  flex flex-col justify-between cursor-pointer  active:scale-95 transition-all duration-300`}
+
             >
 
               <p>
@@ -340,11 +310,8 @@ const [user, setUser] = useState(null)
               </p>
 
               <div className="self-end">
-                <Bookmark
-                   size={38}
-                      onClick={toggleSave}
-                     fill={saved ? "white" : "none"}
-                    className="cursor-pointer"
+                <Bookmark  size={38} onClick={toggleSave} fill={saved ? "white" : "none"}
+                         className="cursor-pointer"
                   />
  
 
@@ -404,8 +371,9 @@ const [user, setUser] = useState(null)
             </button>
 
              <h2 className="text-4xl font-light mb-2">
-  {fact.title}
-</h2>
+               {fact.title}
+
+               </h2>
 
 <p className="text-white/50 text-sm mb-8">
   {fact.source}
