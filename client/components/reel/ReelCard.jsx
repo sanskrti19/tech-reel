@@ -160,45 +160,17 @@ const [user, setUser] = useState(null)
   return (
      <div
        ref={cardRef}
-       className="
-         h-screen
-         snap-start
-         relative
-         overflow-hidden
-       "
-     >  
-      <div className="absolute inset-0 overflow-hidden">
-
-        <img
-
-        src={
-  fact.image ||
-  "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
-}
-       
+       className="h-screen  snap-start relative overflow-hidden">  
+            <div className="absolute inset-0 overflow-hidden">
+        <img src={fact.image ||
+          "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+        }  
           alt={fact.title}
-          className="absolute inset-0 w-full h-full object-cover scale-100 opacity-55 blur-[2px] brightness-[0.55]
-        "
-        />
+          className="absolute inset-0 w-full h-full object-cover scale-100 opacity-55 blur-[2px] brightness-[0.55]"/>
  
-        <div className="absolute inset-0 bg-black/35" />
- 
-        <div
-          className="
-          absolute inset-0
-          bg-[radial-gradient(circle_at_50%_38%,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.45)_35%,transparent_75%)]
-        "
-        />
- 
-        <div
-          className={`
-          absolute inset-0
-          bg-gradient-to-b
-          ${theme.overlay}
-          via-transparent
-          to-black/70
-        `}
-        />
+        <div className="absolute inset-0 bg-black/35" /> 
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.45)_35%,transparent_75%)] "/> 
+        <div className={`absolute inset-0 bg-gradient-to-b ${theme.overlay}via-transparent to-black/70     `} />
 
       </div>
  
@@ -210,10 +182,7 @@ const [user, setUser] = useState(null)
 
             <div className="w-8 h-8 rounded-full bg-zinc-500" />
 
-             <p className="text-sm">
-  {fact.source}
-</p>
-
+             <p className="text-sm">{fact.source}</p>
           </div>
 
           <div className="flex gap-2">
@@ -222,19 +191,11 @@ const [user, setUser] = useState(null)
                     {user.name?.[0]}  </div>  ) : (  <User size={18} /> )}
                     </div>
 
-            <div className="
-            h-10 w-10 rounded-full
-            bg-white/20
-            flex items-center justify-center
-          ">
-              <Search size={18} />
+            <div className=" h-10 w-10 rounded-full bg-white/20 flex items-center justify-center     ">
+                         <Search size={18} />
             </div>
 
-            <div className="
-            h-10 w-10 rounded-full
-            bg-white/20
-            flex items-center justify-center
-          ">
+            <div className=" h-10 w-10 rounded-full bg-white/20 flex items-center justify-center  ">
               <Grid2x2 size={18} />
             </div>
 
@@ -249,15 +210,7 @@ const [user, setUser] = useState(null)
           </p>
 
           <h1
-            className="
-            text-[58px]
-            leading-[0.95]
-            font-extralight
-            line-clamp-4
-            max-w-[300px]
-            overflow-hidden
-            tracking-tight
-          "
+           className="text-5xl sm:text-6xl font-extralight leading-none line-clamp-4 max-w-[320px]"
             style={{
               textShadow: "0 4px 30px rgba(0,0,0,0.7)"
             }}
@@ -267,14 +220,7 @@ const [user, setUser] = useState(null)
 
         </div>
  
-        <div className="
-        absolute
-        bottom-28
-        left-1/2
-        -translate-x-1/2
-        w-[370px]
-        space-y-4
-      ">
+        <div className=" absolute bottom-28 left-1/2 -translate-x-1/2  w-[370px] space-y-4 ">
  
           <div className="grid grid-cols-2 gap-4">
 
@@ -308,23 +254,32 @@ const [user, setUser] = useState(null)
                 About
               </h3>
 
-              <p className="text-zinc-300 leading-3">
-  {preview}
-  {fact.description?.length > 250 && "..."}
-</p>
-<div className="mt-3 flex gap-3">
-  <button>
+              <p className="text-zinc-300 leading-3">  {preview}
+                  {fact.description?.length > 250 && "..."}
+                  </p>
+
+                  <div className="mt-5 flex gap-2 flex-wrap">
+
+  <span className="
+    px-4 py-2 rounded-full
+    bg-white/10 text-xs
+    border border-white/10
+  ">
     Read More
-  </button>
+  </span>
 
-  <button>
-    ✨ Summarize
-  </button>
+  <span className="
+    px-4 py-2 rounded-full
+    bg-cyan-500/20 text-xs
+    border border-cyan-500/20
+  ">
+    Summarize
+  </span>
+
 </div>
+ 
 
-              {/* <p className="text-sm mt-4 leading-6 text-white/70 line-clamp-4">
-                {fact.description}
-              </p> */}
+ 
 
             </div>
 
@@ -448,21 +403,21 @@ const [user, setUser] = useState(null)
               <X size={22} />
             </button>
 
-            <h2 className="text-3xl mb-6">
-              About
-            </h2>
+             <h2 className="text-4xl font-light mb-2">
+  {fact.title}
+</h2>
 
-            <p className="text-zinc-300 leading-7">
-  {preview}
-  {fact.description?.length > 250 && "..."}
+<p className="text-white/50 text-sm mb-8">
+  {fact.source}
 </p>
 
-
+            <p className="text-sm text-zinc-300  leading-6  line-clamp-6  mt-3">  {preview}
+                {fact.description?.length > 250 && "..."}
+                </p>
  
-{/* 
-            <p className="leading-7 text-white/80">
-              {fact.description}
-            </p> */}
+
+
+  
 
           </div>
 

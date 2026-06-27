@@ -16,10 +16,20 @@ async function request(path, options = {}) {
 
   const res = await fetch(url, {
     ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-    },
+     const token =
+  typeof window !== "undefined"
+    ? localStorage.getItem("token")
+    : null;
+
+headers: {
+  "Content-Type": "application/json",
+
+  ...(token && {
+    Authorization: `Bearer ${token}`
+  }),
+
+  ...(options.headers || {})
+},
   });
 
   let data = null;
