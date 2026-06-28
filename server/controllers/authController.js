@@ -2,11 +2,20 @@ const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
+const toClientUser = (user) => ({
+  id: user._id,
+  email: user.email,
+  name: user.name,
+  avatar: user.avatar,
+  bio: user.bio,
+  createdAt: user.createdAt,
+})
+
 const signup = async (req, res) => {
 
   try {
 
-    const { email, password } = req.body
+    const { email, password, name } = req.body
 
     const existingUser =
       await User.findOne({ email })
@@ -22,7 +31,8 @@ const signup = async (req, res) => {
 
     const user = await User.create({
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      name: name || email.split("@")[0]
     })
 
     const token = jwt.sign(
@@ -33,10 +43,7 @@ const signup = async (req, res) => {
 
     res.json({
       token,
-      user: {
-        id: user._id,
-        email: user.email
-      }
+      user: toClientUser(user)
     })
 
   } catch (err) {
@@ -84,10 +91,7 @@ const login = async (req, res) => {
 
     res.json({
       token,
-      user: {
-        id: user._id,
-        email: user.email
-      }
+      user: toClientUser(user)
     })
 
   } catch (err) {

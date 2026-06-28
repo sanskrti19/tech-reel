@@ -4,8 +4,14 @@ const postSchema = new mongoose.Schema({
   title: String,
   description: String,
   source: String,
+  category: String,
   url: String,
   image: String,
+
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
 
   views: {
   type: Number,
@@ -19,6 +25,11 @@ const postSchema = new mongoose.Schema({
   aiSummary: String,
 
   publishedAt: Date,
+
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  },
 
   createdAt: {
     type: Date,
