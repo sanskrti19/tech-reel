@@ -93,7 +93,7 @@ const incrementViews = async (req, res) => {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
       { $inc: { views: 1 } },
-      { new: true }
+      { returnDocument: "after" }
     ).populate("creator", "name avatar bio email");
 
     if (!updatedPost) {
