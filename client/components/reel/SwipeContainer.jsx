@@ -35,6 +35,18 @@ export default function SwipeContainer() {
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
+  const dedupePostsById = useCallback((posts = []) => {
+    const seen = new Set();
+    return posts.filter((post) => {
+      const id = post?._id;
+      if (!id) return true;
+      const key = String(id);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }, []);
+
   useEffect(() => {
     const syncUser = () => {
       try {
@@ -63,8 +75,11 @@ export default function SwipeContainer() {
       const response = await fetch(url);
       const data = await response.json();
 
-      const newPosts = data.posts || [];
-      setFacts((prev) => (isInitial ? newPosts : [...prev, ...newPosts]));
+      const newPosts = dedupePostsById(data.posts || []);
+      setFacts((prev) => {
+        const nextPosts = isInitial ? newPosts : [...prev, ...newPosts];
+        return dedupePostsById(nextPosts);
+      });
       setHasMore(data.hasMore ?? false);
     } catch (error) {
       console.log(error);
@@ -292,7 +307,7 @@ export default function SwipeContainer() {
         if (prev.some((item) => String(item._id) === String(id))) {
           return prev;
         }
-        return [post, ...prev];
+        return dedupePostsById([post, ...prev]);
       });
     }
 
@@ -302,7 +317,7 @@ export default function SwipeContainer() {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, exists ? 0 : 140);
-  }, [facts]);
+  }, [dedupePostsById, facts]);
 
   const handleToggleSave = useCallback(async (fact) => {
     const token = localStorage.getItem("token");
