@@ -220,23 +220,23 @@ useEffect(() => {
   }
 
   return (
-     <div
-       ref={cardRef}
-       className="h-screen  snap-start relative overflow-hidden">  
-            <div className="absolute inset-0 overflow-hidden">
+    <div
+      ref={cardRef}
+      className="h-screen  snap-start relative overflow-hidden">  
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img src={fact.image ||
           "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
         }  
           alt={fact.title}
-          className="absolute inset-0 w-full h-full object-cover scale-100 opacity-55 blur-[2px] brightness-[0.55]"/>
+          className="absolute inset-0 w-full h-full object-cover scale-100 opacity-55 blur-[2px] brightness-[0.55] pointer-events-none"/>
  
-        <div className="absolute inset-0 bg-black/35" /> 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.45)_35%,transparent_75%)] "/> 
-        <div className={`absolute inset-0 bg-gradient-to-b ${theme.overlay} via-transparent to-black/70`} />
+        <div className="absolute inset-0 bg-black/35 pointer-events-none" /> 
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.45)_35%,transparent_75%)] pointer-events-none "/> 
+        <div className={`absolute inset-0 bg-linear-to-b ${theme.overlay} via-transparent to-black/70 pointer-events-none`} />
 
       </div>
  
-      <div className="relative z-10 w-full max-w-[420px] mx-auto h-full px-4 py-5 flex flex-col text-white">
+      <div className="relative z-10 w-full max-w-105 mx-auto h-full px-4 py-5 flex flex-col text-white">
  
         <div className="flex justify-between items-center">
 
@@ -265,14 +265,14 @@ useEffect(() => {
               onClick={onOpenSearch}
               className=" h-10 w-10 rounded-full bg-white/20 flex items-center justify-center cursor-pointer active:scale-95 transition-all duration-300"
             >
-                         <Search size={18} />
+                         <Search size={20} />
             </div>
 
             <div
               onClick={handleGridMenu}
               className=" h-10 w-10 rounded-full bg-white/20 flex items-center justify-center cursor-pointer active:scale-95 transition-all duration-300"
             >
-              <Grid2x2 size={18} />
+              <Grid2x2 size={20} />
             </div>
 
           </div>
@@ -287,16 +287,7 @@ useEffect(() => {
 
           
           <h1
-  className="
-    text-[2.7rem]
-    sm:text-[3.35rem]
-    font-extralight
-    leading-[0.9]
-    line-clamp-4
-    max-w-[310px]
-    tracking-tight
-  "
-
+  className="text-6xl sm:text-7xl font-extralight leading-[0.9] line-clamp-4 max-w-77.5 racking-tight "
             style={{
               textShadow: "0 4px 30px rgba(0,0,0,0.7)"
             }}
@@ -310,25 +301,16 @@ useEffect(() => {
  
           <div className="grid grid-cols-2 gap-3">
 
-   <div
-  className={`
-    h-[130px]
-    rounded-[28px]
-    p-4
-      bg-white/8
-    backdrop-blur-xl
-      border border-white/8
-      shadow-xl
-  `}
->
-  <p className="text-4xl font-bold">
+   <div  className={` h-32.5 rounded-[28px] p-4  bg-white/8 backdrop-blur-xl
+      border border-white/8 shadow-xl `}>
+    <p className="text-6xl font-bold leading-none">
     {fact.views || 0}
   </p>
 
-  <p className="mt-2 text-xs text-white/70">
+    <p className="mt-2 text-sm text-white/70">
     Reads
   </p>
-  <p className="mt-1 text-xs text-white/55">
+    <p className="mt-1 text-sm text-white/55">
     {creatorLabel}
   </p>
 </div>
@@ -339,9 +321,9 @@ useEffect(() => {
     setShowModal(true)
   }}
   className={`
-    h-[120px]
-    min-h-[120px]
-    max-h-[120px]
+    h-30
+    min-h-30
+    max-h-30
     rounded-[28px]
     p-4
     bg-white/8
@@ -354,11 +336,11 @@ useEffect(() => {
     overflow-hidden
   `}
 >
-  <h3 className="text-lg font-light mb-2 tracking-tight">
+    <h3 className="text-lg font-light mb-2 tracking-tight">
     About
   </h3>
    
-  <p className="text-zinc-300 text-xs leading-4 line-clamp-4 overflow-hidden">
+    <p className="text-zinc-300 text-sm leading-5 line-clamp-4 overflow-hidden">
   {cardPreview}
   {fullDescription.length > 100 && "..."}
 </p>
@@ -368,33 +350,33 @@ useEffect(() => {
  
           <div className="grid grid-cols-2 gap-4">
 
-            <div className={` rounded-[32px]  p-6 h-36 bg-white/10 backdrop-blur-xl border border-white/10
+            <div className={` rounded-4xl  p-6 h-36 bg-white/10 backdrop-blur-xl border border-white/10
             shadow-xl flex flex-col justify-between cursor-pointer active:scale-[0.98] transition-all duration-300`}>
 
 
               <div onClick={() => window.open(fact.url, "_blank") } className="...">
-                      <p>Read Docs</p>
+                      <p className="text-base">Read Docs</p>
               </div>
 
               <div className="self-end">
-                <CirclePlus size={38} />
+                <CirclePlus size={40} />
               </div>
 
             </div>
 
             <div
               onClick={() =>  requireAuth(toggleSave)}
-              className={`rounded-[32px] p-6  h-36 bg-white/10 backdrop-blur-xl border border-white/10
+              className={`rounded-4xl p-6  h-36 bg-white/10 backdrop-blur-xl border border-white/10
               shadow-xl  flex flex-col justify-between cursor-pointer  active:scale-95 transition-all duration-300`}
 
             >
 
-              <p>
+              <p className="text-base">
                 {isSaved ? "Saved" : "Save Fact"}
               </p>
 
               <div className="self-end">
-                <Bookmark  size={38} fill={isSaved ? "white" : "none"}
+                <Bookmark  size={40} fill={isSaved ? "white" : "none"}
                          className="cursor-pointer"
                   />
  
@@ -417,10 +399,10 @@ useEffect(() => {
           flex justify-between
           text-white
         ">
-            <Home />
-            <Clock3 onClick={onOpenHistory} className="cursor-pointer" />
-            <Bookmark onClick={onOpenSaved} className="cursor-pointer" />
-            <Grid2x2 />
+          <Home size={20} />
+          <Clock3 onClick={onOpenHistory} size={20} className="cursor-pointer" />
+          <Bookmark onClick={onOpenSaved} size={20} className="cursor-pointer" />
+          <Grid2x2 size={20} />
           </div>
         )}
 
@@ -442,9 +424,9 @@ useEffect(() => {
           <div
           onClick={(e) => e.stopPropagation()}
           className="
-          w-full max-w-[520px]
+          w-full max-w-130
           h-[72vh]
-          max-h-[760px]
+          max-h-190
           rounded-[40px]
           bg-white/8
           border border-white/12
@@ -464,12 +446,12 @@ useEffect(() => {
               <X size={22} />
             </button>
 
-             <h2 className="text-[2.35rem] sm:text-[2.75rem] font-extralight leading-[0.95] tracking-tight mb-4 pr-10">
+             <h2 className="text-[2.5rem] sm:text-[3rem] font-extralight leading-[0.95] tracking-tight mb-4 pr-10">
                {fact.title}
 
                </h2>
 
-<p className="text-white/55 text-sm mb-6 tracking-wide uppercase">
+<p className="text-white/55 text-base mb-6 tracking-wide uppercase">
   {fact.source}
 </p>
 
@@ -484,16 +466,16 @@ useEffect(() => {
                   backdrop-blur-xl
                   animate-in fade-in slide-in-from-bottom-3 duration-500
                 ">
-                  <h3 className="mb-3 text-sm font-light tracking-[0.08em] text-white/75">
+                  <h3 className="mb-3 text-base font-light tracking-[0.08em] text-white/75">
                     ✨ AI Generated Summary
                   </h3>
 
-                  <p className="text-sm text-zinc-200 leading-7 whitespace-pre-line">
+                  <p className="text-base text-zinc-200 leading-7 whitespace-pre-line">
                     {summary}
                   </p>
                 </div>
               ) : (
-                <p className="text-[15px] text-zinc-200 leading-7 whitespace-pre-line animate-in fade-in duration-300">
+                <p className="text-base text-zinc-200 leading-7 whitespace-pre-line animate-in fade-in duration-300">
                   {fullDescription}
                 </p>
               )}
@@ -502,7 +484,7 @@ useEffect(() => {
                 href={articleUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center mt-8 text-sm text-white/80 hover:text-white transition-colors"
+                className="inline-flex items-center mt-8 text-base text-white/80 hover:text-white transition-colors"
               >
                 Read full article ↗
               </a>
@@ -575,10 +557,10 @@ useEffect(() => {
           text-white/60
         "
       >
-        <X size={22} />
+        <X size={24} />
       </button>
 
-      <h2 className="text-3xl mb-2">
+      <h2 className="text-[2rem] sm:text-[2.25rem] mb-2 leading-tight">
 
         {isSignup
           ? "Create account"
@@ -587,7 +569,7 @@ useEffect(() => {
 
       </h2>
 
-      <p className="text-white/60 mb-8">
+      <p className="text-base leading-7 text-white/60 mb-8">
 
         {isSignup
           ? "Sign up to save your tech facts"

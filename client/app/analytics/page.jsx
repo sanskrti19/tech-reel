@@ -57,9 +57,9 @@ export default function AnalyticsPage() {
           <h1 className="mt-2 text-4xl font-extralight tracking-tight">Creator dashboard</h1>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <Stat label="Total posts" value={analytics.totalPosts || 0} />
-            <Stat label="Total views" value={analytics.totalViews || 0} />
-            <Stat label="Total saves" value={analytics.totalSaves || 0} />
+            {summaryMetrics.map((metric) => (
+              <Stat key={metric.label} label={metric.label} value={metric.getValue(analytics)} />
+            ))}
           </div>
         </div>
 
@@ -85,10 +85,45 @@ export default function AnalyticsPage() {
             <p className="mt-4 text-white/60">No posts yet.</p>
           )}
         </div>
+
+        <div className="rounded-[40px] border border-white/10 bg-white/8 backdrop-blur-3xl p-8">
+          <h2 className="text-2xl font-extralight">Future metrics</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {futureMetricPlaceholders.map((metric) => (
+              <div key={metric.label} className="rounded-[28px] border border-dashed border-white/10 bg-white/5 p-5 text-white/60">
+                <p className="text-sm font-medium text-white/80">{metric.label}</p>
+                <p className="mt-2 text-sm leading-6">{metric.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+
+const summaryMetrics = [
+  {
+    label: "Total posts",
+    getValue: (analytics) => analytics.totalPosts || 0,
+  },
+  {
+    label: "Total views",
+    getValue: (analytics) => analytics.totalViews || 0,
+  },
+  {
+    label: "Total saves",
+    getValue: (analytics) => analytics.totalSaves || 0,
+  },
+];
+
+const futureMetricPlaceholders = [
+  { label: "Followers", description: "Track how your audience grows over time." },
+  { label: "Engagement rate", description: "Compare views, saves, and interactions per post." },
+  { label: "Shares", description: "Measure how often content is forwarded externally." },
+  { label: "Comments", description: "Surface discussion volume per reel." },
+  { label: "Watch duration", description: "Capture how long people stay with each post." },
+];
 
 function Stat({ label, value }) {
   return (

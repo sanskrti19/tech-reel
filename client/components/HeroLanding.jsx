@@ -89,13 +89,13 @@ export default function HeroLanding() {
         muted
         playsInline
         preload="auto"
-        className="fixed inset-0 z-0 h-full w-full object-cover"
+        className="fixed inset-0 z-0 h-full w-full object-cover pointer-events-none"
         style={{ objectPosition: "70% center" }}
       >
         <source src={VIDEO_URL} type="video/mp4" />
       </video>
 
-      <div className="fixed inset-0 bg-black/30 backdrop-blur-[1px] z-0" />
+      <div className="fixed inset-0 bg-black/30 backdrop-blur-[1px] z-0 pointer-events-none" />
 
       <header className="fixed inset-x-0 top-0 z-20 px-5 sm:px-8 py-5">
         <div className="relative flex items-center justify-between">

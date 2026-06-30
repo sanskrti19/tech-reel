@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Clock3, Bookmark, Plus, LineChart } from "lucide-react";
+import { Home, Clock3, Bookmark, Plus } from "lucide-react";
 
 const navItems = [
   { label: "Explore", href: "/explore", icon: Home },
@@ -23,23 +23,15 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-5 sm:px-8 py-5 pointer-events-none">
+      <header className="fixed inset-x-0 top-0 z-[100] px-5 sm:px-8 py-5 pointer-events-none">
         <div className="pointer-events-auto flex items-center justify-between">
           <Link href="/explore" className="text-white text-lg font-semibold tracking-tight">
             TechReel
           </Link>
-
-          <button
-            onClick={() => router.push("/analytics")}
-            className="h-10 w-10 rounded-full bg-white/15 border border-white/15 backdrop-blur-xl flex items-center justify-center text-white transition active:scale-95"
-            aria-label="Open analytics"
-          >
-            <LineChart size={18} />
-          </button>
         </div>
       </header>
 
-      <nav className="fixed inset-x-0 bottom-0 z-50 px-5 sm:px-8 pb-5 pointer-events-none">
+      <nav className="fixed inset-x-0 bottom-0 z-[100] px-5 sm:px-8 pb-5 pointer-events-none">
         <div className="pointer-events-auto mx-auto flex w-full max-w-md items-center justify-between rounded-full border border-white/12 bg-white/10 backdrop-blur-3xl px-3 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
           {navItems.map((item) => {
             const Icon = item.icon;

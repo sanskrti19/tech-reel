@@ -417,8 +417,7 @@ export default function SwipeContainer() {
               setShowHistory(true);
             }}
             onGridMenu={() => {
-              // TODO: Wire top-right grid menu actions in a future Explore release.
-              console.log("Coming soon");
+              router.push("/analytics");
             }}
           />
         </div>
@@ -427,11 +426,11 @@ export default function SwipeContainer() {
       {showSearch && (
         <div
           onClick={() => setShowSearch(false)}
-          className="fixed inset-0 z-[60] bg-black/65 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-60 bg-black/65 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-xl rounded-[32px] bg-white/10 border border-white/15 backdrop-blur-2xl p-5 text-white shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-250"
+            className="w-full max-w-xl rounded-4xl bg-white/10 border border-white/15 backdrop-blur-2xl p-5 text-white shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-250"
           >
             <input
               autoFocus
@@ -472,11 +471,11 @@ export default function SwipeContainer() {
       {showSaved && (
         <div
           onClick={() => setShowSaved(false)}
-          className="fixed inset-0 z-[60] bg-black/65 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-60 bg-black/65 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-xl h-[72vh] rounded-[32px] bg-white/10 border border-white/15 backdrop-blur-2xl p-5 text-white shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-250 flex flex-col"
+            className="w-full max-w-xl h-[72vh] rounded-4xl bg-white/10 border border-white/15 backdrop-blur-2xl p-5 text-white shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-250 flex flex-col"
           >
             <h3 className="text-2xl font-light tracking-tight">Saved Posts</h3>
 
@@ -523,11 +522,11 @@ export default function SwipeContainer() {
       {showHistory && (
         <div
           onClick={() => setShowHistory(false)}
-          className="fixed inset-0 z-[60] bg-black/65 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-60 bg-black/65 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-xl h-[72vh] rounded-[32px] bg-white/10 border border-white/15 backdrop-blur-2xl p-5 text-white shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-250 flex flex-col"
+            className="w-full max-w-xl h-[72vh] rounded-4xl bg-white/10 border border-white/15 backdrop-blur-2xl p-5 text-white shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-250 flex flex-col"
           >
             <h3 className="text-2xl font-light tracking-tight">Today&apos;s History</h3>
 

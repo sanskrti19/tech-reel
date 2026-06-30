@@ -171,7 +171,7 @@ export default function ProfileView({ userId: userIdProp = "" }) {
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.09),transparent_35%),linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.85))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.09),transparent_35%),linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.85))] pointer-events-none" />
       <div className="relative z-10 max-w-5xl mx-auto px-5 py-6 sm:py-10">
         <div className="rounded-[40px] border border-white/10 bg-white/8 backdrop-blur-3xl p-6 sm:p-8 shadow-[0_18px_64px_rgba(0,0,0,0.3)]">
           <div className="flex flex-col sm:flex-row sm:items-end gap-6 justify-between">
